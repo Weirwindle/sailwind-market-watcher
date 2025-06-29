@@ -16,7 +16,7 @@
 
 ### 🧭 Market Scan Example
 
-![Market Finder GUI](marketfinder.png)
+![Market Finder GUI](MarketFinder.png)
 
 ## 💾 Requirements
 
