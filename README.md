@@ -7,6 +7,18 @@ This tool connects to your running game, reads market data directly from memory,
 
 ---
 
+🚀 **How to Use**
+1. Launch Sailwind
+2. Once in-game, run main.py using Python
+3. Click "Scan For Markets" in the GUI
+4. Enter your player values:
+    - Currency exchange rate
+    - Cargo limits (mass/volume)
+    - Available money
+    - Minimum profit
+5. Select your start and destination island groups
+6. Browse the trade table for top opportunities!
+
 ## 📌 Features
 
 ✅ **Live Memory Scan**  
