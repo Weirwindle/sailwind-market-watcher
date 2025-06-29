@@ -34,7 +34,7 @@ A modern, user-friendly interface with:
 - Input fields for cargo & currency
 
 ---
-💡 Development
+💡 **Development**
 This project is written in Python using:
 - tkinter for the GUI
 - pymem for memory access
@@ -42,10 +42,23 @@ This project is written in Python using:
 - Pillow for image icons
 
 ---
-🧠 How It Works
+🧠 **How It Works**
 This app reads Sailwind’s memory using pymem, scanning for a known pattern of market objects. 
 It interprets product supplies and calculates dynamic prices using the game’s internal pricing formula.
 It does not modify game memory or change game behavior.
+
+💱 **Currency Conversion**
+The game uses different currencies in different regions (Lions, Dragons, Crowns, etc).
+To calculate trades properly:
+1. Visit a Currency Exchange port in the game
+2. Use the posted exchange rate to convert to Lions
+3. Enter that value into the app’s Conversion Rate field
+
+💡 Estimated values shown in the app:
+    Lions ≈ 34.0
+    Dragons ≈ 330
+    Crowns ≈ 82.0
+Use the actual in-game rate when possible for best results.
 
 ## 🧰 Requirements
 
