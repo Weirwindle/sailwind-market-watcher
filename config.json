@@ -1,0 +1,50 @@
+{
+    "products": {
+        "Salmon": [3, 23, 2.6712], "Dates": [2, 4.6, 1.3167], "Coconuts": [3, 50, 4.52655],
+        "Lamb": [3, 21, 3.85245], "Tea": [3, 50, 8.49555], "Tuna": [3, 29, 2.4003],
+        "Cheese": [3, 15, 3.0555], "Goat Cheese": [3, 14, 2.6712], "Sunspot Fish": [3, 21, 2.0349],
+        "Water": [4, 68, 0.6741], "Rum": [4, 68, 1.2411], "Beer": [4, 68, 1.1277],
+        "Wine": [4, 68, 1.701], "Northfish": [3, 21, 2.93895], "Sausages": [3, 29, 3.4839],
+        "Pork": [3, 29, 5.11875], "Bananas": [5, 23, 2.93895], "Trout": [3, 24.2, 2.2176],
+        "Eel": [2, 19.2, 3.7926], "Gems": [2, 160, 170.6859], "Iron": [3, 380, 31.1598],
+        "Gold": [2, 400, 455.1813], "Copper": [3, 260, 16.98795], "Spices": [4, 40, 5.6574],
+        "Grain": [5, 100, 5.0967], "Medicine": [2, 40, 11.3211], "Seafood": [2, 40, 3.39255],
+        "Silk": [3, 60, 18.68895], "Goods": [3, 80, 6.7914], "Books": [3, 160, 9.05625],
+        "Venison": [3, 30, 9.05625], "Truffles": [2, 10, 68.0652], "Tools": [5, 130, 13.59225],
+        "Sculptures": [12, 800, 37.4], "Logs": [20, 1800, 51.0237], "Mead": [4, 68, 2.2617],
+        "White Tob": [2, 5.4, 6.50475], "Green Tob": [2, 5.4, 17.4447], "Black Tob": [2, 5.4, 7.6419],
+        "Brown Tob": [2, 5.4, 5.43375], "Blue Tob": [2, 5.4, 21.8106], "Rice": [10, 120, 4.2399],
+        "Oranges": [5, 53, 9.7398], "Forest Mushrooms": [2, 12.6, 5.11875], "---": [10, 100, 0.1],
+        "Cave Mushrooms": [2, 15, 6.34095], "Lumber": [16, 1200, 33.99795], "Nails": [3, 200, 19.8261],
+        "Leather": [3, 60, 12.45825], "Rabbit Furs": [2, 20, 14.7231], "---2": [10, 100, 0.1],
+        "Wool": [3, 40, 7.36155], "Olive Oil": [1, 10, 13.59225], "Apples": [3, 11, 0.90405],
+        "Marble": [12, 1000, 37.39995], "Silver": [2, 220, 68.0652], "Sulfur": [4, 130, 22.65795], 
+        "Cider": [4, 68, 2.2617]
+    },
+    "island_groups": {
+        "Al'Ankh (Group 1)": [
+            "Gold Rock City", "Al'Nilem", "Neverdin", "Albacore Town",
+            "Alchemist's Island", "Al'Ankh Academy", "Oasis"
+        ],
+        "Aestrin (Group 2)": [
+            "Fort Aestrin", "Sunspire", "Mount Malefic", "Siren Song", 
+            "Eastwind", "Aestra Abbey", "Firefly Grotto", "Fey Valley"
+        ],
+        "Chronos (Group 3)": ["Chronos"],
+        "Happy Bay (Group 4)": ["Happy Bay"],
+        "Emerald Archipelago (Group 5)": [
+            "Dragon Cliffs", "Sanctuary", "Crab Beach",
+            "New Port", "Sage Hills", "Serpent Isle"
+        ],
+        "Fire Fish Lagoon (Group 6)": [
+            "Kicia Bay", "Fire Fish Town", "On'na", "Sen'na"
+        ]
+    },
+    "player_settings": {
+        "principal": 10000,
+        "conversion_rate": 34.22,
+        "mass_limit": 4000,
+        "volume_limit": 120,
+        "min_profit": 100
+    }
+}
