@@ -1,4 +1,5 @@
 # ⛵ Sailwind Market Watcher
+![Market Finder GUI](MarketFinder.png)
 
 A real-time market and trade route analyzer for the open-world sailing game **Sailwind**.
 
@@ -33,10 +34,18 @@ A modern, user-friendly interface with:
 - Input fields for cargo & currency
 
 ---
+💡 Development
+This project is written in Python using:
+- tkinter for the GUI
+- pymem for memory access
+- psutil for process handling
+- Pillow for image icons
 
-### 🧭 Market Scan Example
-
-![Market Finder GUI](MarketFinder.png)
+---
+🧠 How It Works
+This app reads Sailwind’s memory using pymem, scanning for a known pattern of market objects. 
+It interprets product supplies and calculates dynamic prices using the game’s internal pricing formula.
+It does not modify game memory or change game behavior.
 
 ## 🧰 Requirements
 
