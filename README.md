@@ -81,6 +81,7 @@ Use the actual in-game rate when possible for best results.
   - `pymem`
   - `psutil`
   - `pillow`
+  - `tkinter`
 
 Install dependencies with:
 
