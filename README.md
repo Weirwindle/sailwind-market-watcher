@@ -20,7 +20,7 @@
 - Python 3.9+
 - Game: [Sailwind on Steam](https://store.steampowered.com/app/1284190/Sailwind/)
 - Python packages:  
-  `pymem`, `psutil`, `pillow`
+  `pymem`, `psutil`, `pillow`, `tkinter`
 
 To install dependencies:
 ```bash
