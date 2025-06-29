@@ -14,6 +14,10 @@
 
 ---
 
+### 🧭 Market Scan Example
+
+![Market Finder GUI](marketfinder.png)
+
 ## 💾 Requirements
 
 - Windows
