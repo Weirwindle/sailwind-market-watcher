@@ -100,7 +100,7 @@ Use the actual in-game rate when possible for best results.
 
 - Windows OS
 - Python 3.9+
-- The game [**Sailwind**](https://store.steampowered.com/app/1284190/Sailwind)[ on Steam](https://store.steampowered.com/app/1284190/Sailwind)
+- The game [**Sailwind**](https://store.steampowered.com/app/1284190/Sailwind)[ on Steam](https://store.steampowered.com/app/1284190/Sailwind) Version 0.32
 - Python dependencies:
   - `pymem`
   - `pillow`
