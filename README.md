@@ -72,6 +72,10 @@ To calculate trades properly:
     Crowns ≈ 82.0
 Use the actual in-game rate when possible for best results.
 
+## 📋 Changelog
+
+See what's new in each version: [CHANGELOG.md](./CHANGELOG.md)
+
 ## 🧰 Requirements
 
 - Windows OS
