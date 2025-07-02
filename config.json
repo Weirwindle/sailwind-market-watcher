@@ -4,7 +4,7 @@
         "Lamb": [3, 21, 3.85245], "Tea": [3, 50, 8.49555], "Tuna": [3, 29, 2.4003],
         "Cheese": [3, 15, 3.0555], "Goat Cheese": [3, 14, 2.6712], "Sunspot Fish": [3, 21, 2.0349],
         "Water": [4, 68, 0.6741], "Rum": [4, 68, 1.2411], "Beer": [4, 68, 1.1277],
-        "Wine": [4, 68, 1.701], "Northfish": [3, 21, 2.93895], "Sausages": [3, 29, 3.4839],
+        "Wine": [4, 68, 1.701], "North Fish": [3, 21, 2.93895], "Sausages": [3, 29, 3.4839],
         "Pork": [3, 29, 5.11875], "Bananas": [5, 23, 2.93895], "Trout": [3, 24.2, 2.2176],
         "Eel": [2, 19.2, 3.7926], "Gems": [2, 160, 170.6859], "Iron": [3, 380, 31.1598],
         "Gold": [2, 400, 455.1813], "Copper": [3, 260, 16.98795], "Spices": [4, 40, 5.6574],
@@ -19,7 +19,7 @@
         "Leather": [3, 60, 12.45825], "Rabbit Furs": [2, 20, 14.7231], "---2": [10, 100, 0.1],
         "Wool": [3, 40, 7.36155], "Olive Oil": [1, 10, 13.59225], "Apples": [3, 11, 0.90405],
         "Marble": [12, 1000, 37.39995], "Silver": [2, 220, 68.0652], "Sulfur": [4, 130, 22.65795], 
-        "Cider": [4, 68, 2.2617]
+        "Cider": [4, 68, 2.2617], "Hemp": [3, 36, 5.528], "Dyes": [2, 40, 23.736], "Rubber": [1, 12, 8.905]
     },
     "island_groups": {
         "Al'Ankh (Group 1)": [
@@ -34,7 +34,8 @@
         "Happy Bay (Group 4)": ["Happy Bay"],
         "Emerald Archipelago (Group 5)": [
             "Dragon Cliffs", "Sanctuary", "Crab Beach",
-            "New Port", "Sage Hills", "Serpent Isle"
+            "New Port", "Sage Hills", "Serpent Isle",
+            "Turtle Island", "Dead Cove"
         ],
         "Fire Fish Lagoon (Group 6)": [
             "Kicia Bay", "Fire Fish Town", "On'na", "Sen'na"
@@ -45,6 +46,6 @@
         "conversion_rate": 34.22,
         "mass_limit": 4000,
         "volume_limit": 120,
-        "min_profit": 100
+        "min_profit": 200
     }
 }
