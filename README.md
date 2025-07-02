@@ -79,9 +79,7 @@ Use the actual in-game rate when possible for best results.
 - The game [**Sailwind** on Steam](https://store.steampowered.com/app/1284190/Sailwind)
 - Python dependencies:
   - `pymem`
-  - `psutil`
   - `pillow`
-  - `tkinter`
 
 Install dependencies with:
 
