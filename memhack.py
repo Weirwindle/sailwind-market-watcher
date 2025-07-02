@@ -1,5 +1,4 @@
 import struct
-import psutil
 import pymem
 import pymem.process
 
@@ -128,20 +127,3 @@ def find_memory_address(pm, address):
 
     # Search the memory for the formatted byte pattern
     return pm.pattern_scan_all(pattern_bytes, return_multiple=True)
-
-def get_pid(process_name):
-    """Finds the PID of a running process by name."""
-    for proc in psutil.process_iter(attrs=['pid', 'name']):
-        if proc.info['name'].lower() == process_name.lower():
-            return proc.info['pid']
-    return None
-
-def pause_process(process_name):
-    pid = get_pid(process_name)
-    process = psutil.Process(pid)
-    process.suspend()
-
-def resume_process(process_name):
-    pid = get_pid(process_name)
-    process = psutil.Process(pid)
-    process.resume()
