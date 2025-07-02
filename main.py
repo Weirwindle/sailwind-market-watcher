@@ -159,7 +159,7 @@ def find_markets(pm, status_label, root, markets, update_chart_button):
     markets.clear()
     markets.extend([Market(pm, addr - 0x4E) for addr in pm.pattern_scan_all(PATTERN, return_multiple=True)])
     
-    if len(markets) != 27:
+    if len(markets) != 29:
         print(f'⚠️ Found {len(markets)} markets. Exiting...')
         status_label.config(text="⚠️ Error: Market scan failed")
         return []
