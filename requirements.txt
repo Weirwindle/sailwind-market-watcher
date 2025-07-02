@@ -1,4 +1,2 @@
 pymem
-psutil
 pillow
-tkinter
