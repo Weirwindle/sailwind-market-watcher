@@ -104,8 +104,69 @@ Use the actual in-game rate when possible for best results.
 - Python dependencies:
   - `pymem`
   - `pillow`
+## 🐍 Installation Guide (Windows)
 
-Install dependencies with:
+Follow these steps to install Python, set up dependencies, and run **Sailwind Market Watcher**.
+
+---
+
+### ✅ 1. Install Python
+
+1. Download Python from the official site:\
+   👉 [https://www.python.org/downloads/windows](https://www.python.org/downloads/windows)
+
+2. Run the installer and:
+
+   - ✅ **Check** “Add Python to PATH”
+   - Click **Install Now**
+   - Wait for it to finish, then click **Close**
+
+---
+
+### 🖥️ 2. Open Command Prompt
+
+To open a Command Prompt window:
+
+- Press **Windows key**, type **cmd**, and press **Enter**
+
+Or to open it in the app folder:
+
+- Hold **Shift** and **Right-click** in the folder window
+- Choose **"Open PowerShell window here"** or **"Open Command Window Here"**
+
+---
+
+### 📁 3. Download the Project
+
+**Option A: Download ZIP**
+
+- Go to [Sailwind Market Watcher GitHub](https://github.com/Weirwindle/sailwind-market-watcher)
+- Click the green **“Code”** button → **“Download ZIP”**
+- Extract the folder
+
+**Option B: Use Git (optional)**
+
+```bash
+git clone https://github.com/Weirwindle/sailwind-market-watcher.git
+```
+
+---
+
+### 📦 4. Install Required Dependencies
+
+Navigate to the extracted folder in Command Prompt:
+
+```bash
+cd path\to\Sailwind-Market-Watcher
+```
+
+Then install the required Python packages:
+
+```bash
+pip install pymem pillow
+```
+
+Or, if you prefer using a `requirements.txt` (optional):
 
 ```bash
 pip install -r requirements.txt
@@ -113,9 +174,35 @@ pip install -r requirements.txt
 
 ---
 
+### 🚀 5. Run the App
+
+While in the folder, run:
+
+```bash
+python main.py
+```
+
+Make sure Sailwind is running before launching the app.
+
+---
+
+### ❗ Troubleshooting
+
+- If nothing happens, run from Command Prompt to see error messages
+- Ensure Python and dependencies are installed
+- Using `.exe`? Just double-click `main.exe`
+
+---
+
 ## 🔄 Changelog
 
 See: [📋 CHANGELOG.md](./CHANGELOG.md)
+
+---
+
+## 📜 License
+
+MIT License. See [LICENSE](./LICENSE)
 
 ---
 
@@ -126,9 +213,16 @@ See: [📋 CHANGELOG.md](./CHANGELOG.md)
 - **App closes instantly**: Run from terminal to see errors: `python main.py`
 - **tkinter not found**: Linux users may need: `sudo apt install python3-tk`
 
+
+---
+
+## 🔄 Changelog
+
+See: [📋 CHANGELOG.md](./CHANGELOG.md)
+
+
 ---
 
 ## 📜 License
 
 MIT License. See [LICENSE](LICENSE) file.
-
