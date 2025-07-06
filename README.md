@@ -163,12 +163,6 @@ cd path\to\Sailwind-Market-Watcher
 Then install the required Python packages:
 
 ```bash
-pip install pymem pillow
-```
-
-Or, if you prefer using a `requirements.txt` (optional):
-
-```bash
 pip install -r requirements.txt
 ```
 
