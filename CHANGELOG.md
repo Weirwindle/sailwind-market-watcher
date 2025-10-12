@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.1.2] - 2025-10-12
+## [v1.2.0] - 2025-10-12
 ### Added
 - Support the 3 new Al Ankh islands. Old Ankh Town, Mirage Island and Saffron Island
 - 2 New tradable items. Salt and Saffron

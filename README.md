@@ -1,4 +1,4 @@
-# ⛵ Sailwind Market Watcher
+# ⛵ Sailwind Market Watcher for 0.33.2
 ![Market Finder GUI](MarketFinder.png)
 
 A real-time market and trade route analyzer for the open-world sailing game **Sailwind**.
