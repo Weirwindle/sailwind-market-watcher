@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.3.0] - 2025-10-13
+### Added
+- Sortable Columns. 
+    Primary Sort on Origin and Destination Columns
+    Secondary Sort on $Profit, $/Pound, and $/Item metrics
+- Clean up and refactoring
+
 ## [v1.2.0] - 2025-10-12
 ### Added
 - Support the 3 new Al Ankh islands. Old Ankh Town, Mirage Island and Saffron Island

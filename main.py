@@ -217,7 +217,7 @@ def generate_trade_routes(start_groups, end_groups, player, markets):
 # =============================================================================
 # GUI Helper Functions
 # =============================================================================
-
+   
 def update_values():
     try:
         player.update(**{key: float(var.get()) for key, var in {
@@ -229,22 +229,35 @@ def update_values():
         print("Invalid input! Please enter numeric values.")
 
 def update_chart():
+    if not markets:
+        return
+
+    # Get selected start/end groups
     start_groups = [f"{name} (Group {idx+1})" for idx, name in enumerate(island_names)
                     if start_group_vars[name].get() == 1]
     end_groups = [f"{name} (Group {idx+1})" for idx, name in enumerate(island_names)
                   if end_group_vars[name].get() == 1]
 
+    # Update product data
     for market in markets:
         market.update_products(player.conversion_rate)
 
-    # Generate, sort, and insert trade routes into the treeview
-    trade_routes = sorted(generate_trade_routes(start_groups, end_groups, player, markets), 
-                          key=lambda x: (x["Start Market"], -x["$Profit"]))
-    
+    # Generate trade routes
+    trade_routes = generate_trade_routes(start_groups, end_groups, player, markets)
+
+    # Sort with primary + secondary
+    sort_routes(trade_routes)
+
+    # Clear Treeview
     tree.delete(*tree.get_children())
     for route in trade_routes:
-        tree.insert("", "end", values=[route[k] for k in ["Start Market", "End Market", "Product", 
-                                                         "Qnty", "$_Buy", "$_Sell", "$Profit", "$/Pound", "$/Item"]])
+        tree.insert("", "end", values=[route[k] for k in [
+            "Start Market", "End Market", "Product", "Qnty",
+            "$_Buy", "$_Sell", "$Profit", "$/Pound", "$/Item"
+        ]])
+
+    # Update headers
+    update_column_headers()
 
 def update_loop():
     update_chart()
@@ -324,6 +337,7 @@ root.iconphoto(True, icon)
 
 style = ttk.Style(root)
 style.theme_use('clam')
+style.configure("Treeview.Heading", font=('TkDefaultFont', 9, 'bold'), background="#e0f3ff")
 
 # Configure grid rows on the root window:
 root.grid_rowconfigure(0, weight=0)
@@ -335,28 +349,29 @@ root.grid_columnconfigure(0, weight=1)
 # -------------------------------
 # Row 0: Scan Button and Status Label
 # -------------------------------
-button_frame = ttk.Frame(root, padding="3")
-button_frame.grid(row=0, column=0, sticky="ew", padx=5, pady=3)
+button_frame = ttk.Frame(root, padding="1")
+button_frame.grid(row=0, column=0, sticky="ew", padx=3, pady=1)
 
 player = Player()
 print(player)  # Print player information for debugging
 markets = []
 start_button = ttk.Button(button_frame, text="Scan For Markets", 
                           command=lambda: find_markets(pm, status_label, root, markets, update_chart_button))
-start_button.grid(row=0, column=0, sticky="w", padx=(0, 10))
+start_button.grid(row=0, column=0, sticky="w", padx=(0, 6))
 
 status_label = ttk.Label(button_frame, text="", font=("Arial", 10))
 status_label.grid(row=0, column=1, sticky="w")
 
+
 # ---------------------
 # Row 1: Player Inputs
 # ---------------------
-top_frame = ttk.Frame(root, padding="8")
+top_frame = ttk.Frame(root, padding="6")
 top_frame.grid(row=1, column=0, sticky="ew")
 
 # Left: Player Inputs Frame
-player_frame = ttk.LabelFrame(top_frame, text="Player Inputs", padding="8")
-player_frame.grid(row=0, column=0, sticky="nsew", padx=(0, 8))
+player_frame = ttk.LabelFrame(top_frame, text="  Player Inputs", padding="4")
+player_frame.grid(row=0, column=0, sticky="nsew", padx=(0, 6))
 
 # Default values from player
 player_principal_var = tk.StringVar(value=player.principal)
@@ -366,25 +381,25 @@ volume_limit_var = tk.StringVar(value=player.volume_limit)
 min_profit_var = tk.StringVar(value=player.min_profit)
 
 # Adjust the width of the text boxes
-ttk.Label(player_frame, text="Player Principal:").grid(row=0, column=0, sticky="w", pady=3)
-player_principal = ttk.Entry(player_frame, textvariable=player_principal_var, width=15)  # Narrower
-player_principal.grid(row=0, column=1, sticky="ew", pady=3)
+ttk.Label(player_frame, text="Player Principal:").grid(row=0, column=0, sticky="w", pady=2)
+player_principal = ttk.Entry(player_frame, textvariable=player_principal_var, width=15)
+player_principal.grid(row=0, column=1, sticky="ew", pady=2)
 
-ttk.Label(player_frame, text="Conversion Rate:").grid(row=1, column=0, sticky="w", pady=3)
-conversion_rate = ttk.Entry(player_frame, textvariable=conversion_rate_var, width=15)  # Narrower
-conversion_rate.grid(row=1, column=1, sticky="ew", pady=3)
+ttk.Label(player_frame, text="Conversion Rate:").grid(row=1, column=0, sticky="w", pady=2)
+conversion_rate = ttk.Entry(player_frame, textvariable=conversion_rate_var, width=15)
+conversion_rate.grid(row=1, column=1, sticky="ew", pady=2)
 
-ttk.Label(player_frame, text="Weight Limit:").grid(row=2, column=0, sticky="w", pady=3)
-weight_limit = ttk.Entry(player_frame, textvariable=weight_limit_var, width=15)  # Narrower
-weight_limit.grid(row=2, column=1, sticky="ew", pady=3)
+ttk.Label(player_frame, text="Weight Limit:").grid(row=2, column=0, sticky="w", pady=2)
+weight_limit = ttk.Entry(player_frame, textvariable=weight_limit_var, width=15)
+weight_limit.grid(row=2, column=1, sticky="ew", pady=2)
 
-ttk.Label(player_frame, text="Volume Limit:").grid(row=3, column=0, sticky="w", pady=3)
-volume_limit = ttk.Entry(player_frame, textvariable=volume_limit_var, width=15)  # Narrower
-volume_limit.grid(row=3, column=1, sticky="ew", pady=3)
+ttk.Label(player_frame, text="Volume Limit:").grid(row=3, column=0, sticky="w", pady=2)
+volume_limit = ttk.Entry(player_frame, textvariable=volume_limit_var, width=15)
+volume_limit.grid(row=3, column=1, sticky="ew", pady=2)
 
-ttk.Label(player_frame, text="Min Profit:").grid(row=4, column=0, sticky="w", pady=3)
-min_profit = ttk.Entry(player_frame, textvariable=min_profit_var, width=15)  # Narrower
-min_profit.grid(row=4, column=1, sticky="ew", pady=3)
+ttk.Label(player_frame, text="Min Profit:").grid(row=4, column=0, sticky="w", pady=2)
+min_profit = ttk.Entry(player_frame, textvariable=min_profit_var, width=15)
+min_profit.grid(row=4, column=1, sticky="ew", pady=2)
 
 tooltips = {
     player_principal: "Player money in the currency used",
@@ -406,7 +421,7 @@ player_frame.columnconfigure(1, weight=1)
 # --------------------------
 # Row 1.5: Group Checkboxes
 # --------------------------
-group_frame = ttk.LabelFrame(top_frame, text="Select Groups", padding="5")
+group_frame = ttk.LabelFrame(top_frame, text="  Select Groups", padding="5")
 group_frame.grid(row=0, column=1, sticky="nsew")
 
 # Create separate frames for Start and End Group Checkboxes
@@ -431,6 +446,12 @@ end_group_vars = create_group_checkboxes(
     label_text="End Groups:"
 )
 
+# --------------------------
+# Version Label Below Checkboxes
+# --------------------------
+version_label = ttk.Label(group_frame, text="v1.3.0", font=("Arial", 9, "italic"))
+version_label.grid(row=1, column=0, columnspan=2, sticky="w", pady=(3, 0))
+
 # -------------------------------
 # Row 2: Trade Table (Chart)
 # -------------------------------
@@ -441,9 +462,99 @@ root.grid_rowconfigure(2, weight=1)  # Allow table frame to expand
 columns = ("From", "To", "Product", "Qnty", "$Buy", "$Sell", "$Profit", "$/Pound", "$/Item")
 tree = ttk.Treeview(table_frame, columns=columns, show="headings")
 
+# -----------------------------------------------------------------------------
+# Column Sorting Logic (Primary + Persistent Secondary Sort + Auto Refresh)
+# -----------------------------------------------------------------------------
+sort_state = {
+    "primary_col": "From",
+    "primary_reverse": True,    # Descending
+    "secondary_col": "$Profit",
+    "secondary_reverse": False  # Ascending
+}
+
+# Define which columns can be sorted
+primary_sortable = ["From", "To"]
+secondary_sortable = ["$Profit", "$/Pound", "$/Item"]
+
+def treeview_sort_column(col):
+    """Handle clicks on Treeview column headers."""
+    global sort_state
+
+    if col in primary_sortable:
+        # Toggle or switch primary sort
+        if sort_state["primary_col"] == col:
+            sort_state["primary_reverse"] = not sort_state["primary_reverse"]
+        else:
+            sort_state["primary_col"] = col
+            sort_state["primary_reverse"] = False
+
+    elif col in secondary_sortable:
+        # Toggle or switch secondary sort
+        if sort_state["secondary_col"] == col:
+            sort_state["secondary_reverse"] = not sort_state["secondary_reverse"]
+        else:
+            sort_state["secondary_col"] = col
+            sort_state["secondary_reverse"] = True
+
+    else:
+        return  # Ignore non-sortable columns
+
+    update_chart()  # Auto refresh (or use update_loop() if your data reloads there)
+
+def convert_numeric(val):
+    """Convert string to float, ignoring $ and commas."""
+    try:
+        return float(str(val).replace("$", "").replace(",", ""))
+    except Exception:
+        return val
+
+def sort_routes(routes):
+    """Sort trade routes according to current sort_state."""
+    def get_val(route, col):
+        mapping = {
+            "From": route["Start Market"],
+            "To": route["End Market"],
+            "$Profit": convert_numeric(route["$Profit"]),
+            "$/Pound": convert_numeric(route["$/Pound"]),
+            "$/Item": convert_numeric(route["$/Item"])
+        }
+        return mapping.get(col, 0)
+
+    # Secondary sort first (stable)
+    routes.sort(key=lambda r: get_val(r, sort_state["secondary_col"]),
+                reverse=sort_state["secondary_reverse"])
+    # Primary sort overrides
+    routes.sort(key=lambda r: get_val(r, sort_state["primary_col"]),
+                reverse=sort_state["primary_reverse"])
+
+def update_column_headers():
+    """Update Treeview headers with arrow indicators for primary/secondary sorts."""
+    for col in columns:
+        arrow = ""
+        if col == sort_state["primary_col"]:
+            arrow = " ▲" if sort_state["primary_reverse"] else " ▼"
+        elif col == sort_state["secondary_col"]:
+            arrow = " ⮟" if sort_state["secondary_reverse"] else " ⮝"
+        tree.heading(col, text=col + arrow, command=lambda c=col: treeview_sort_column(c))
+
+# Initialize clickable headers
+for col in columns:
+    tree.heading(col, text=col, command=lambda c=col: treeview_sort_column(c))
+
+def initialize_default_sort():
+    """Apply default sorting when program starts."""
+    sort_state.update({
+        "primary_col": "From",
+        "primary_reverse": False,  # False = A→Z
+        "secondary_col": "$Profit",
+        "secondary_reverse": True  # True = high→low
+    })
+    update_chart()
+
+
 # Set column widths
 column_widths = {"From": 80, "To": 80, "Product": 60, "Qnty": 20, "$Buy": 20,
-                "$Sell": 20, "$Profit": 30, "$/Pound": 30, "$/Item": 30
+                "$Sell": 20, "$Profit": 30, "$/Pound": 35, "$/Item": 30
 }
 
 for col in columns:
@@ -461,6 +572,6 @@ scrollbar.grid(row=0, column=1, sticky="ns")
 tree.bind("<MouseWheel>", lambda event: on_mouse_wheel(event, tree))
 
 # Automatic chart update every second
-root.after(5000, update_loop)
-
+initialize_default_sort()
+root.after(2000, update_loop)
 root.mainloop()

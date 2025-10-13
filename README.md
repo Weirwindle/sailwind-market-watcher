@@ -47,6 +47,7 @@ Select specific **start** and **destination** island groups to tailor your strat
 🖼️ **Interactive GUI**\
 A modern, user-friendly interface with:
 
+- Sortable Columns for simple analytics
 - Live-updating trade table
 - Tooltips for helpful guidance
 - Input fields for cargo & currency
@@ -178,25 +179,6 @@ python main.py
 
 Make sure Sailwind is running before launching the app.
 
----
-
-### ❗ Troubleshooting
-
-- If nothing happens, run from Command Prompt to see error messages
-- Ensure Python and dependencies are installed
-- Using `.exe`? Just double-click `main.exe`
-
----
-
-## 🔄 Changelog
-
-See: [📋 CHANGELOG.md](./CHANGELOG.md)
-
----
-
-## 📜 License
-
-MIT License. See [LICENSE](./LICENSE)
 
 ---
 
@@ -207,12 +189,35 @@ MIT License. See [LICENSE](./LICENSE)
 - **App closes instantly**: Run from terminal to see errors: `python main.py`
 - **tkinter not found**: Linux users may need: `sudo apt install python3-tk`
 
-
 ---
 
 ## 🔄 Changelog
 
-See: [📋 CHANGELOG.md](./CHANGELOG.md)
+## [v1.3.0] - 2025-10-13
+### Added
+- Sortable Columns. 
+    Primary Sort on Origin and Destination Columns
+    Secondary Sort on $Profit, $/Pound, and $/Item metrics
+- Clean up and refactoring
+
+## [v1.2.0] - 2025-10-12
+### Added
+- Support the 3 new Al Ankh islands. Old Ankh Town, Mirage Island and Saffron Island
+- 2 New tradable items. Salt and Saffron
+
+## [v1.1.0] - 2025-07-02
+### Added
+- Support for 2 new islands in latest Sailwind version
+- 3 new tradeable items
+
+### Fixed
+- Fixed Emeralch Arch trades not showing because of a misname
+- Removed Unneeded Library PSutil
+
+## [v1.0.0] - 2025-06-29
+### Added
+- Initial release of Sailwind Market Watcher
+- Trade route table and player settings input
 
 
 ---
