@@ -25,7 +25,7 @@ This tool connects to your running game, reads market data directly from memory,
 ## 📌 Features
 
 ✅ **Live Memory Scan**\
-Scans all 27 in-game markets for live product supply data and prices.
+Scans all 32 in-game markets for live product supply data and prices.
 
 💰 **Profit-Driven Trade Routes**\
 Automatically finds the most profitable trades based on:
