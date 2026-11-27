@@ -10,7 +10,7 @@ This tool connects to your running game, reads market data directly from memory,
 🚀 **How to Use**
 
 1. Launch Sailwind
-2. Once in-game, run `main.py` using Python
+2. Once in-game, double-click **Launch Market Watcher.bat**
 3. Click "Scan For Markets" in the GUI
 4. Enter your player values:
    - Currency exchange rate
@@ -19,6 +19,37 @@ This tool connects to your running game, reads market data directly from memory,
    - Minimum profit
 5. Select your start and destination island groups
 6. Browse the trade table for top opportunities!
+
+### Read the Port Market
+
+After scanning, choose a **Departure port** such as **Gold Rock City**, then
+open **Port Market**. Hover over a column heading for a quick explanation.
+
+| Column | What it shows |
+| --- | --- |
+| **Product** | The commodity at the selected port. |
+| **Stock** | The estimated number of crates available to buy. A zero means none are available. |
+| **Est. Buy / Crate** | What you would pay for the next crate. A dash means the good is out of stock. |
+| **Est. Sell / Crate** | What the port would pay for one crate you already own. A port can have a sell quote even when its stock is zero. |
+
+For example, **Stock 21**, **Buy 247**, and **Sell 242** means the port has an
+estimated 21 crates for sale, the next one would cost about 247, and the port
+would pay about 242 for one crate you sell. Prices can change as you buy or
+sell, so multiplying a one-crate price by the quantity gives a rough estimate.
+
+### Read Trade Routes
+
+Use **Port Market** to check what is available locally. Switch to **Trade
+Routes** to see where you could sell it and what you might earn on the planned
+load. In **Qnty**, a value like **5/21** means the route uses 5 of the estimated
+21 crates available at the departure port. **$Buy**, **$Sell**, and **$Profit**
+are totals for those 5 crates. The budget, cargo limits, and minimum profit
+filter apply to this tab.
+
+Choose a specific **Departure port** to plan trades from that port. Choose
+**Selected start groups** to browse departures by region. **End Groups**
+controls which destinations the route table considers. Click **Update Values**
+to apply and save your player inputs.
 
 ---
 
@@ -60,6 +91,23 @@ A modern, user-friendly interface with:
 - `pymem` for memory access
 - `Pillow` for image icons
 
+Run the offline tests and code checks from the repository folder:
+
+```powershell
+python -m pip install -r requirements.txt ruff
+python -m unittest discover -s tests -v
+python -m ruff check .
+python -m ruff format --check .
+```
+
+For a live Sailwind 0.41 check, load your save at Gold Rock City and scan from
+PowerShell. Compare Goods stock and a one-crate purchase quote with the current
+in-game market. The offline pricing tests use synthetic supply values. The
+console reports separate timings for region queries, memory reads, signature
+matching, and market loading.
+
+See [CHANGELOG.md](CHANGELOG.md) for changes in progress and release history.
+
 ---
 
 🧠 **How It Works**
@@ -72,7 +120,7 @@ A modern, user-friendly interface with:
 ```python
 def calc_sell_price(supply, V):
     coeff = 0.38 if supply > 0.5 else -1.68
-    return ceil((coeff * V / 10000) * (supply ** 2) - (abs(coeff) * V / 50) * supply + V)
+    return ceil((coeff * V / 10000) * (supply**2) - (abs(coeff) * V / 50) * supply + V)
 ```
 
 - Builds a table of trade routes, ranked by total and per-item profit
@@ -107,7 +155,15 @@ Use the actual in-game rate when possible for best results.
   - `pillow`
 ## 🐍 Installation Guide (Windows)
 
-Follow these steps to install Python, set up dependencies, and run **Sailwind Market Watcher**.
+### Standalone Windows executable
+
+Once the build workflow is on the repository's default branch, open **Actions → Build Windows executable → Run workflow**. When it finishes, open the run and download **SailwindMarketWatcher-Windows-x64** from **Artifacts**. Extract the ZIP, load your Sailwind save, and double-click `SailwindMarketWatcher.exe`. The executable bundles Python and the app dependencies.
+
+### Python launcher
+
+Install Python 3.9 or newer, extract the project to a writable folder, and load your Sailwind save. Double-click **Launch Market Watcher.bat** in the project folder. The first launch needs internet access to install Pymem and Pillow into a local `.venv`. Later launches reuse that environment. The console stays open while the app runs so you can see scan timings and errors.
+
+The remaining steps describe the manual setup for anyone who prefers to launch from a terminal.
 
 ---
 

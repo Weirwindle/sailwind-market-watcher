@@ -1,6 +1,8 @@
 import struct
+
 import pymem
 import pymem.process
+
 
 def get_address(pm, chain):
     """
@@ -19,15 +21,20 @@ def get_address(pm, chain):
     module_name, base_offset, offsets = chain
 
     try:
-        module_base = pymem.process.module_from_name(pm.process_handle, module_name).lpBaseOfDll
+        module_base = pymem.process.module_from_name(
+            pm.process_handle, module_name
+        ).lpBaseOfDll
         address = module_base + base_offset
         for offset in offsets:
-            address = pm.read_longlong(address) + offset  # Read 8-byte pointer at address
+            address = (
+                pm.read_longlong(address) + offset
+            )  # Read 8-byte pointer at address
         return address
-    
+
     except Exception as e:
         print(f"Error reading memory: {e}")
         return None
+
 
 def read_game_memory(pm, address, data_type):
     """
@@ -48,26 +55,29 @@ def read_game_memory(pm, address, data_type):
         int, float, or None: The value read from memory, or None if an error occurs.
     """
     try:
-        if data_type == 'int':
+        if data_type == "int":
             return pm.read_int(address)  # 4-byte integer
-        elif data_type == 'float':
+        elif data_type == "float":
             return pm.read_float(address)  # 4-byte float
-        elif data_type == 'long':
+        elif data_type == "long":
             return pm.read_long(address)  # 4-byte integer
-        elif data_type == 'long long':
+        elif data_type == "long long":
             return pm.read_longlong(address)  # 8-byte integer
-        elif data_type == 'BE_float':  # Big-endian float (4 bytes)
+        elif data_type == "BE_float":  # Big-endian float (4 bytes)
             raw_data = pm.read_bytes(address, 4)
-            return struct.unpack('>f', raw_data)[0]
-        elif data_type == 'BE_int':  # Big-endian integer (4 bytes)
+            return struct.unpack(">f", raw_data)[0]
+        elif data_type == "BE_int":  # Big-endian integer (4 bytes)
             raw_data = pm.read_bytes(address, 4)
-            return struct.unpack('>i', raw_data)[0]
+            return struct.unpack(">i", raw_data)[0]
         else:
-            raise ValueError(f"Unsupported data type specified for reading: {data_type}")
+            raise ValueError(
+                f"Unsupported data type specified for reading: {data_type}"
+            )
 
     except Exception as e:
         print(f"Error reading memory: {e}")
         return None
+
 
 def write_game_memory(pm, address, data_type, value):
     """
@@ -89,29 +99,32 @@ def write_game_memory(pm, address, data_type, value):
         None
     """
     try:
-        if data_type == 'int':
+        if data_type == "int":
             pm.write_int(address, value)  # 4-byte integer
-        elif data_type == 'float':
+        elif data_type == "float":
             pm.write_float(address, value)  # 4-byte float
-        elif data_type == 'long':
+        elif data_type == "long":
             pm.write_long(address, value)  # 4-byte integer
-        elif data_type == 'long long':
+        elif data_type == "long long":
             pm.write_longlong(address, value)  # 8-byte integer
-        elif data_type == 'BE_float':  # Big-endian float (4 bytes)
-            raw_data = struct.pack('>f', value)
+        elif data_type == "BE_float":  # Big-endian float (4 bytes)
+            raw_data = struct.pack(">f", value)
             pm.write_bytes(address, raw_data, len(raw_data))
-        elif data_type == 'BE_int':  # Big-endian integer (4 bytes)
-            raw_data = struct.pack('>i', value)
+        elif data_type == "BE_int":  # Big-endian integer (4 bytes)
+            raw_data = struct.pack(">i", value)
             pm.write_bytes(address, raw_data, len(raw_data))
         else:
-            raise ValueError(f"Unsupported data type specified for writing: {data_type}")
+            raise ValueError(
+                f"Unsupported data type specified for writing: {data_type}"
+            )
 
     except Exception as e:
         print(f"Error writing memory: {e}")
 
+
 def find_memory_address(pm, address):
     """
-    Searches memory for occurrences of a specific 8-byte memory address, 
+    Searches memory for occurrences of a specific 8-byte memory address,
     formatted as raw bytes (in \\x{byte:02x} format).
 
     Args:
@@ -122,8 +135,8 @@ def find_memory_address(pm, address):
         list[int]: A list of memory addresses where the given address pattern was found.
     """
     # Convert the address to little-endian 8-byte format
-    address_bytes = address.to_bytes(8, byteorder='little')
-    pattern_bytes = rb''.join(f'\\x{byte:02x}'.encode() for byte in address_bytes)
+    address_bytes = address.to_bytes(8, byteorder="little")
+    pattern_bytes = rb"".join(f"\\x{byte:02x}".encode() for byte in address_bytes)
 
     # Search the memory for the formatted byte pattern
     return pm.pattern_scan_all(pattern_bytes, return_multiple=True)

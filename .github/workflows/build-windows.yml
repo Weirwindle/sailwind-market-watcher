@@ -1,0 +1,53 @@
+name: Build Windows executable
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          architecture: x64
+
+      - name: Install build dependencies
+        run: python -m pip install -r requirements.txt "pyinstaller>=6,<7"
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Package Market Watcher
+        run: >-
+          python -m PyInstaller --noconfirm --onefile --console
+          --name SailwindMarketWatcher --icon boat.ico
+          --add-data "boat.ico:." --add-data "config.json:." main.py
+
+      - name: Check the packaged app starts without Sailwind installed
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          $output = & ".\dist\SailwindMarketWatcher.exe"
+          $exitCode = $LASTEXITCODE
+          $output | Write-Host
+          if ($exitCode -ne 1 -or ($output -join "`n") -notmatch 'Sailwind\.exe is not running') {
+            throw "The executable did not reach the expected game-not-running check."
+          }
+          exit 0
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: SailwindMarketWatcher-Windows-x64
+          path: |
+            dist/SailwindMarketWatcher.exe
+            LICENSE
+          if-no-files-found: error
